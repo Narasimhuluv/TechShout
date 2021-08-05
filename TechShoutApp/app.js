@@ -3,9 +3,25 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var session = require('express-session');
+var MongoStore = require('connect-mongo');
+var flash = require('connect-flash');
+var passport = require('passport');
+
+require('dotenv').config();
+
+
+var auth = require('./middlewares/auth');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+// Connect with database
+mongoose.connect('mongodb://localhost/TechShout', {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+  console.log(err ? err: "Connected to Databse");
+})
 
 var app = express();
 
@@ -21,6 +37,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// Add Sessions
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: 'mongodb://localhost/TechShout' })
+}));
+
+app.use(flash());
+
+app.use(auth.userInfo);
+
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

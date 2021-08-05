@@ -13,6 +13,8 @@ var userSchema = new Schema({
     password: { type: String, minlength: 5 },
     posts: [{ type: Schema.Types.ObjectId }],
     profilePic: String,
+    follwers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    following: [{ type: Schema.Types.ObjectId,  ref: 'User' }],
     isVerified: { type: Boolean, default: false }
 }, { timestamps: true });
 
