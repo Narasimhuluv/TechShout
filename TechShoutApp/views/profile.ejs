@@ -16,53 +16,77 @@
             </section>
         </main> -->
     <main>
-        <div class="home_container">
-            <aside class="py-16">
-                <img class="image_crop w-2/6" src="/images/logo.png" alt="">
-                <nav>
-                    <ul class="">
-                        <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/globe.png"/> <a href="">Home</a></li>
-                        <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/google-home.png"/> <a href="">Explore</a></li>
-                        <!-- <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/test-account.png"/> <a href="">Profile</a></li> -->
+        <div class="home_container flex">
+            <aside class="py-16 ">
+               <div>
+                    <img class="image_crop w-2/6" src="/images/logo.png" alt="">
+                    <nav>
+                        <ul class="">
+                            <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/globe.png"/> <a href="">Home</a></li>
+                            <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/google-home.png"/> <a href="">Explore</a></li>
+                            <!-- <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/test-account.png"/> <a href="">Profile</a></li> -->
+                            <% if(user.profilePic) { %>
+                                <div class="flex justify-center">
+                                <li class="li flex  align_center mr-20 px-24 highlite">
+                                        <% if(user.profilePic.includes('http')) { %>
+                                            <img src="<%= user.profilePic %>" alt="Profile Pic" class="w-6/12 rounded-full ml-0">
+                                        <% } else { %>
+                                            <img src="/uploads/<%= user.profilePic %>" alt="Profile Pic" class="w-full rounded-full">
+                                        <% } %>
+
+                                        <a href="">Profile</a>
+                                </li>
+
+                                
+                                </div>
+                        <% } %>
+                            <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/more.png"/> <a href="">More</a></li>
+                        </ul>
+                    </nav>
+
+                    <section class="flex flex-col items-center">
                         <% if(user.profilePic) { %>
-                            <div class="flex justify-center">
-                               <li class="li flex  align_center mr-20 px-24 highlite">
-                                    <% if(user.profilePic.includes('http')) { %>
-                                        <img src="<%= user.profilePic %>" alt="Profile Pic" class="w-6/12 rounded-full ml-0">
-                                     <% } else { %>
-                                        <img src="/uploads/<%= user.profilePic %>" alt="Profile Pic" class="w-full rounded-full">
-                                    <% } %>
-
-                                    <a href="">Profile</a>
-                               </li>
-
-                               
-                            </div>
-                       <% } %>
-                        <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/more.png"/> <a href="">More</a></li>
-                    </ul>
-                </nav>
-
-
-                <section class="flex flex-col items-center">
-                   <% if(user.profilePic) { %>
-                        <div class="flex justify-center w-2/4 mt-20">
-                            <% if(user.profilePic.includes('http')) { %>
-                                <img src="<%= user.profilePic %>" alt="Profile Pic" class="w-6/12 rounded-full">
-                           <% } else { %>
-                                <img src="/uploads/<%= user.profilePic %>" alt="Profile Pic" class="w-full rounded-full">
-                           <% } %>
-                        </div>
-                   <% } %>
-
-                    <h4 class="text-green-600 mt-1 font-bold" > <%= user.name %></h4>
-                    <a href="/users/logout">
-                        <button class="border-2 mt-4 py-1 px-5 rounded-xl "><i class="fas fa-power-off"></i><strong class="ml-2">Logout</strong></button>
-                    </a>
-                </section>
-
-                
+                             <div class="flex justify-center w-2/4 mt-20">
+                                 <% if(user.profilePic.includes('http')) { %>
+                                     <img src="<%= user.profilePic %>" alt="Profile Pic" class="w-6/12 rounded-full">
+                                <% } else { %>
+                                     <img src="/uploads/<%= user.profilePic %>" alt="Profile Pic" class="w-full rounded-full">
+                                <% } %>
+                             </div>
+                        <% } %>
+     
+                         <h4 class="text-green-600 mt-1 font-bold" > <%= user.name %></h4>
+                         <a href="/users/logout">
+                             <button class="border-2 mt-4 py-1 px-5 rounded-xl "><i class="fas fa-power-off"></i><strong class="ml-2">Logout</strong></button>
+                         </a>
+                     </section>
+               </div>
 
             </aside>
+
+            <section class="ml-14 right">
+                <h2 class="ml-4 mb-3">Leave Your Post</h2>
+                <form action="/posts" method="POST" enctype="multipart/form-data">
+                    <input type="text" class="border-2 py-1 px-2 w-3/6 rounded-xl h-28" name="content"  placeholder="Post your data ">
+                    <div class="flex items-center">
+                        <div class="w-2/6 flex ">
+                            <label for="imageFile" class="block"><i class="fas fa-photo-video text-2xl mt-3 text-green-600"></i></label>
+                            <input type="file" id="imageFile"  name="media" class="hidden mt-3 ml-3 ">
+                            <i class="fas fa-smile-beam text-2xl mt-3 ml-4 text-green-600"></i>
+                        </div>
+                       
+                    </div>
+                    <input type="submit" class="border-2 py-1 px-4 mt-3 rounded-xl bg-green-400  text-white">
+                </form>
+
+                <article class="w-full border-2">
+                    <% user.posts.forEach(element => {%>
+                            <div class="w-full post_content">
+                                <p><%= element.content  %> </p>
+                            </div>
+                    <% }) %>
+                </article>
+            </section>
+            
         </div>
     </main>

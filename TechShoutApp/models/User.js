@@ -11,7 +11,7 @@ var userSchema = new Schema({
     username: { type: String, required: true},
     email: { type: String, required: true, unique: true },
     password: { type: String, minlength: 5 },
-    posts: [{ type: Schema.Types.ObjectId }],
+    posts: [{ type: Schema.Types.ObjectId, ref: "Post"}],
     profilePic: String,
     follwers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     following: [{ type: Schema.Types.ObjectId,  ref: 'User' }],

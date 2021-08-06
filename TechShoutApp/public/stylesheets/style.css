@@ -228,11 +228,15 @@ table {
 }
 
 .registration {
-  border: 1px solid rgba(128, 128, 128, 0.267);
+  border: 1px solid rgba(128, 128, 128, 0.61);
   padding: 2rem;
   -webkit-box-shadow: -2px -2px 8px white, 3px 3px 5px rgba(0, 0, 0, 0.1);
           box-shadow: -2px -2px 8px white, 3px 3px 5px rgba(0, 0, 0, 0.1);
   background: white;
+}
+
+.registration form {
+  border: 1px solid gray;
 }
 
 .registration form input {
@@ -264,6 +268,16 @@ table {
   height: 100%;
 }
 
+.home_container .right {
+  width: 65%;
+  border: 1px solid rgba(128, 128, 128, 0.226);
+  -webkit-box-shadow: -2px -2px 8px white, 3px 3px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: -2px -2px 8px white, 3px 3px 5px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-radius: 20px;
+  padding: 1rem;
+}
+
 .flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -283,8 +297,7 @@ table {
 }
 
 aside {
-  width: 20%;
-  position: fixed;
+  width: 30%;
   border: 1px solid rgba(128, 128, 128, 0.233);
   padding: 1rem 0;
   border-radius: 20px;
@@ -332,5 +345,14 @@ aside .li a {
 aside .li img {
   width: 40px;
   opacity: 80%;
+}
+
+.post_content {
+  margin-top: 2rem;
+  border-radius: 25px;
+  border: 1px solid rgba(128, 128, 128, 0.137);
+  -webkit-box-shadow: -2px -2px 8px white, 3px 3px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: -2px -2px 8px white, 3px 3px 5px rgba(0, 0, 0, 0.1);
+  background: white;
 }
 /*# sourceMappingURL=style.css.map */
