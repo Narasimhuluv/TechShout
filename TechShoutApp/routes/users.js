@@ -43,7 +43,6 @@ router.get('/', (req, res, next) => {
 });
 
 // User Registration 
-
 router.get('/register', function(req, res, next) {
     var error = req.flash('error')[0];
     res.render('registration', { error });
