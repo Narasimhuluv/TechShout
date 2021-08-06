@@ -1,6 +1,7 @@
 var passport = require('passport');
 var User = require('../models/User');
 
+
 var GitHubStrategy = require('passport-github').Strategy;
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
