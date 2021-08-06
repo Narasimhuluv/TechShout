@@ -18,6 +18,7 @@ router.post('/:postId', (req, res, next) => {
             if(error) return next(error);
             res.send(post);
         })
+        // res.send(comment.id)
     })
 })
 
