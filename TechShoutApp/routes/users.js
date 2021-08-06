@@ -94,7 +94,7 @@ router.post('/register', upload.single('profilePic') ,(req, res, next) => {
       });
     });
   });
-})
+});
 
 
 
@@ -140,9 +140,11 @@ router.get('/login/forgotpassword', (req, res, next) => {
   let error = req.flash('error')[0];
   let info = req.flash('info')[0];
   res.render('forgotPassword', {error, info});
-router.get('/', function(req, res, next) {
-  res.render('home')
 });
+
+// router.get('/', function(req, res, next) {
+//   res.render('home')
+// }
 
 let code = randomNumber();
 //process forgot password

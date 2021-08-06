@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "build": "tailwindcss build ./public/stylesheets/tailwind.css -o ./public/stylesheets/style.css"
+    "build": "tailwindcss build ./public/stylesheets/tailwind.css -o ./public/stylesheets/tailwindstyle.css"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
