@@ -49,6 +49,7 @@ router.get('/register', function(req, res, next) {
 });
 
 router.post('/register', upload.single('profilePic') ,(req, res, next) => {
+  // return res.send(req.body);
   if (req.file) { 
     req.body.profilePic = req.file.filename;
   }
