@@ -140,6 +140,8 @@ router.get('/login/forgotpassword', (req, res, next) => {
   let error = req.flash('error')[0];
   let info = req.flash('info')[0];
   res.render('forgotPassword', {error, info});
+router.get('/', function(req, res, next) {
+  res.render('home')
 });
 
 let code = randomNumber();
