@@ -20,7 +20,7 @@ router.get('/auth/github', passport.authenticate('github'));
 
 router.get('/auth/github/callback', passport.authenticate('github', 
   { failureRedirect: '/users/login' }), (req, res) => {
-    res.redirect(req.session.returnTo || '/users/profile');
+    res.redirect(req.session.returnTo || '/profile');
     delete req.session.returnTo;
     // res.redirect('/users/dashboard');
   });
@@ -33,7 +33,7 @@ router.get('/auth/google', passport.authenticate('google', { scope: ['email', 'p
 router.get('/auth/google/callback', passport.authenticate('google', 
     { failureRedirect: '/users/login' }), (req, res) => {
 
-      res.redirect(req.session.returnTo || '/users/profile');
+      res.redirect(req.session.returnTo || '/profile');
       delete req.session.returnTo;
     });
 

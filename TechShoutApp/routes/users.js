@@ -128,7 +128,7 @@ router.post('/login', (req, res, next) => {
         return res.redirect('/users/login');
         } 
         req.session.userId = user.id;
-        res.redirect(req.session.returnTo || '/users/profile');
+        res.redirect(req.session.returnTo || '/profile');
         delete req.session.returnTo;
     });
   });
@@ -238,15 +238,6 @@ router.post('/login/resetpassword', (req, res, next) => {
 });
 
 router.use(auth.loggedInUser);
-
-router.get('/profile', (req, res, next) => {
-  let userId = req.session.userId || req.session.passport.user;
-  User.findOne({_id: userId }, (err, user) => {
-    if(err) return next(err);
-          res.render('profile', { user: user });
-        })
-      });
-
 
 // Logout
 router.get('/logout', (req, res, next) => {
