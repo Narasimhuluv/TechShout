@@ -7,7 +7,8 @@ var Post = require('../models/Post')
 router.get('/', auth.loggedInUser, (req, res, next) => {
     let userId = req.session.userId || req.session.passport.user;
     Post.find({}).populate('comments').populate('author').exec((error, posts) => {
-      return res.send(posts)
+      // return res.send(posts)
+      res.render('home', {posts})
     });
   });
 
