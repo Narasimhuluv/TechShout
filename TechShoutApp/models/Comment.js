@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var commentSchema = new Schema({
     content: {type: String, required: true},
-    post: {type: Schema.Types.ObjectId, ref:"User"},
+    post: {type: Schema.Types.ObjectId, ref:"Post"},
+    author: {type: Schema.Types.ObjectId, ref:"User"},
     likes: {type: Number, default: 0},
     dislikes: {type: Number, default: 0}
 }, {timestamps: true})

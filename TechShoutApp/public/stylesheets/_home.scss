@@ -1,12 +1,29 @@
 .home_container{
     max-width: 1300px;
     width: 100%;
+    height: 100vh;
     margin: auto;
-    // border: 1px solid grey;
     position: relative;
-    height: 100%;
+    overflow-y: scroll;
+    height: 90vh;
+    &::-webkit-scrollbar{
+        width: 0;
+    }
+    .right{
+        width: 65%;
+        height: 90vh;
+        border: 1px solid rgba(128, 128, 128, 0.226);
+        // box-shadow: -2px -2px 8px rgba(255,255,255,1),
+        //     3px 3px 5px rgba(0,0,0,0.1);
+        background: white;
+        border-radius: 20px;
+        padding: 1rem;
+        overflow: scroll;
+        &::-webkit-scrollbar{
+            width: 0;
+        }
+    }
 }
-
 .flex{
     display: flex;
 }
@@ -17,12 +34,11 @@
     align-items: center;
 }
 aside{
-    width: 20%;
-    position: fixed;
+    width: 30%;
+    height: 90vh;
     border: 1px solid rgba(128, 128, 128, 0.233);
     padding: 1rem 0;
     border-radius: 20px;
-    left: 17%;
     transition: all 0.5s ease;
     padding: 0.5rem;
     box-shadow: -2px -2px 8px rgba(255,255,255,1),
@@ -63,3 +79,15 @@ aside{
     }
     
 }
+
+
+//------------------------------------
+
+.post_content{
+    margin-top: 2rem;
+    border-radius: 25px;
+            border: 1px solid rgba(128, 128, 128, 0.137);
+            box-shadow: -2px -2px 8px rgba(255,255,255,1),
+                    3px 3px 5px rgba(0,0,0,0.1);
+            background: white;
+}   

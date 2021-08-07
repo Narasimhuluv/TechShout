@@ -1,32 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="../public/stylesheets/style.css">
-
-</head>
-<body>
-    <header>
-
-    </header>
+<% include partials/header %> 
 
     <main>
-        <div class="home_container">
-            <aside>
-                <nav>
-                    <ul class="">
-                        <img src="" alt="">
-                        <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/globe.png"/> <a href="">Home</a></li>
-                        <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/google-home.png"/> <a href="">Explore</a></li>
-                        <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/test-account.png"/> <a href="">Profile</a></li>
-                        <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/more.png"/> <a href="">More</a></li>
-                    </ul>
-                </nav>
-
-            </aside>
+        <div class="home_container flex">
+            <aside class="py-16 h-screen">
+                <div>
+                     <img class="image_crop w-2/6" src="/images/birdlogo.png" alt="">
+                     <nav>
+                         <ul class="">
+                             <li class="li flex  align_center w-2/12 highlite"><img src="https://img.icons8.com/fluency/48/000000/globe.png"/> <a href="/home">Home</a></li>
+                             <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/google-home.png"/> <a href="">Explore</a></li>
+                             <!-- <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/test-account.png"/> <a href="">Profile</a></li> -->
+                             <% if(user.profilePic) { %>
+                                 <div class="flex justify-center">
+                                 <li class="li flex  align_center mr-20 px-24 ">
+                                         <% if(user.profilePic.includes('http')) { %>
+                                             <img src="<%= user.profilePic %>" alt="Profile Pic" class="w-6/12 rounded-full ml-0">
+                                         <% } else { %>
+                                             <img src="/uploads/<%= user.profilePic %>" alt="Profile Pic" class="w-full rounded-full">
+                                         <% } %>
+ 
+                                         <a href="">Profile</a>
+                                 </li>
+ 
+                                 
+                                 </div>
+                         <% } %>
+                             <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/more.png"/> <a href="">More</a></li>
+                         </ul>
+                     </nav>
+ 
+                     <section class="flex flex-col items-center">
+                         <% if(user.profilePic) { %>
+                              <div class="flex justify-center w-2/4 mt-20">
+                                  <% if(user.profilePic.includes('http')) { %>
+                                      <img src="<%= user.profilePic %>" alt="Profile Pic" class="w-6/12 rounded-full">
+                                 <% } else { %>
+                                      <img src="/uploads/<%= user.profilePic %>" alt="Profile Pic" class="w-full rounded-full">
+                                 <% } %>
+                              </div>
+                         <% } %>
+      
+                          <h4 class="text-green-600 mt-1 font-bold" > <%= user.name %></h4>
+                          <a href="/users/logout">
+                              <button class="border-2 mt-4 py-1 px-5 rounded-xl "><i class="fas fa-power-off"></i><strong class="ml-2">Logout</strong></button>
+                          </a>
+                      </section>
+                </div>
+ 
+             </aside>
+ 
+             <section class="ml-14 right">
+                
+ 
+                 <article class="w-full border-2 py-5">
+                     <% posts.forEach(element => {%>
+                             <div class="w-full post_content py-5 px-5">
+                                 <div class="flex items-center w-3/6">
+                                     
+                                         <% if(element.author.profilePic.includes('http')) { %>
+                                             <img src="<%= element.author.profilePic %>" alt="Profile Pic" class="w-1/12 rounded-full">
+                                        <% } else { %>
+                                             <img src="/uploads/<%= element.author.profilePic %>" alt="Profile Pic" class="w-1/12 rounded-full">
+                                        <% } %>
+                                     <p class="ml-3"><%= element.author.name  %> </p>
+                                 </div>
+                                 <p class="text-xl mt-4"><%= element.content  %> </p>
+                                 <% if(element.imageFile){%>
+                                    <img class="h-52 border-2 rounded-lg mt-4"  src="uploads/<%=element.imageFile%>" alt="<%=element.imageFile%>">
+                                <%} else if(element.videoFile){%>
+                                    <video  controls muted class=" border-2 rounded-lg mt-4"> 
+                                        <source src="uploads/<%= element.videoFile  %> " type="video/mp4"> 
+                                      </video>
+                                <%}%> 
+                                 <div class="flex mt-4" >
+                                     <a href="" >
+                                         <p><%=element.likes ? element.likes : 0  %> </p>
+                                     </a>
+                                     <a href="">
+                                         <i class="fas fa-heart ml-2 text-red-500"></i>
+                                     </a>
+                                     <a href="" class="ml-6">
+                                         <button><i class="fas fa-comment ml-4 text-blue-400"></i><strong class="ml-2">comment</strong></button>
+                                     </a>
+ 
+                                     <a href="">
+                                         <i class="fas fa-share-alt ml-10 text-blue-700"></i>
+                                     </a>
+ 
+                                     <a href="">
+                                         <i class="fas fa-trash ml-10 text-blck-700"></i>
+                                     </a>
+                                 </div>
+                             </div>
+                     <% }) %>
+                 </article>
+             </section>
         </div>
     </main>
 
