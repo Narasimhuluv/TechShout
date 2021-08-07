@@ -80,7 +80,7 @@
                 </form>
 
                 <article class="w-full border-2 py-5">
-                    <% user.posts.forEach(element => {%>
+                    <% posts.forEach(element => {%>
                             <div class="w-full post_content py-5 px-5">
                                 <div class="flex items-center w-3/6">
                                     
@@ -92,7 +92,7 @@
                                     <p class="ml-3"><%= user.name  %> </p>
                                 </div>
                                 <p class="text-xl mt-4"><%= element.content  %> </p>
-                                <img class="h-52 border-2 rounded-lg mt-4"  src="/uploads/1628259767302-u3e0jxnva6te9a3kx5ji.jpeg" alt="">
+                                <img class="h-52 border-2 rounded-lg mt-4"  src="uploads/<%=element.imageFile%>" alt="<%=element.imageFile%>">
                                 <div class="flex mt-4" >
                                     <a href="" >
                                         <p><%=element.likes ? element.likes : 0  %> </p>
