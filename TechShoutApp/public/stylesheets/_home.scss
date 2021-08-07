@@ -91,3 +91,33 @@ aside{
                     3px 3px 5px rgba(0,0,0,0.1);
             background: white;
 }   
+
+
+// Comment Model
+
+.commentModelContainer{
+    width: 50%;
+    height: 45vh;
+    border: 1px solid red;
+    position: absolute;
+    top: 20%;
+    background-color: white;
+    border-radius: 25px;
+    animation: openup linear 0.5s ease;
+    .CommentDiv{
+        .cross{
+            position: absolute;
+            right: 2rem;
+            top: 1rem;
+            color: blue;
+        }
+    }
+}
+
+@keyframes openup {
+    from{
+        opacity: 0;
+    }to{
+        opacity: 100%;
+    }
+}
