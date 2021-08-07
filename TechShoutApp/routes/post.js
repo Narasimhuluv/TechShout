@@ -27,7 +27,7 @@ router.get('/new', (req, res, next) => {
 
 //POST new post
 router.post('/', upload.single('media'), (req, res, next) => {
-    // console.log(req.file)
+    console.log(req.file)
     // return res.send(req.body);
     const userId = req.user.id;
     req.body.author = userId;
