@@ -167,7 +167,7 @@ router.post('/login/forgotpassword', (req, res, next) => {
     });
     
     const mailOptions = {
-      from: 'techshout@gmail.com',
+      from: 'techshout484@gmail.com',
       to: email,
       subject: 'Verification Email',
       html: `<h1>${req.body.random}</h1>
