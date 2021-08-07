@@ -27,12 +27,21 @@ router.get('/new', (req, res, next) => {
 
 //POST new post
 router.post('/', upload.single('media'), (req, res, next) => {
-    // console.log(req.file)
+    console.log(req.file)
     // return res.send(req.body);
     const userId = req.user.id;
     req.body.author = userId;
     if(req.file){
-        req.body.imageFile = req.file.filename;
+        let formatName = req.file.filename.split(".").pop();
+        let imageFormats = ['jpg', 'jpeg', 'png', 'gif'];
+        let videoFormats = ['mp4', 'avi', 'mkv', 'webm'];
+        if(imageFormats.includes(formatName)){
+            console.log((formatName));
+            req.body.imageFile = req.file.fileName;
+        }else if(videoFormats.includes(formatName)){
+            req.body.videoFile = req.file.fileName;
+        } 
+        return res.send(req.body)
     }
     Post.create(req.body, (error, post) => {
         if(error) return next(error);

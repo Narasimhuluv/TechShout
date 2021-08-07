@@ -12,6 +12,7 @@ router.get('/new', (req, res, next) => {
 router.post('/:postId', (req, res, next) => {
     var postId = req.params.postId; 
     req.body.post = postId;
+    req.body.author = req.user.id;
     Comment.create(req.body, (error, comment) => {
         if(error) return next(error);
         Post.findByIdAndUpdate(postId, {$push:{"comments":comment.id}}, (error, post) => {
