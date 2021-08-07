@@ -18,10 +18,12 @@ router.post('/:postId', (req, res, next) => {
         if(error) return next(error);
         Post.findByIdAndUpdate(postId, {$push:{"comments":comment.id}}, (error, post) => {
             if(error) return next(error);
-            res.send(post);
+            res.send(comment);
         })
     })
 })
+
+// Delete Post
 
 
 

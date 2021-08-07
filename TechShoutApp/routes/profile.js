@@ -2,6 +2,7 @@ var express = require('express');
 const Post = require('../models/Post');
 var router = express.Router();
 var auth = require('../middlewares/auth')
+var path = require('path')
 
 var User = require('../models/User');
 

@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 var path = require('path');
+var fs = require('fs');
+var path = require('path');
 
 var Post = require('../models/Post');
 var User = require('../models/User');
@@ -60,6 +62,15 @@ router.get('/', (req, res, next) => {
     })
 })
 
+//GET single posts 
+router.get('/:id', (req, res, next) => {
+    var postId = req.params.id;
+    Post.findById(postId).populate('comments').exec((error, posts) => {
+        if(error) return next(error);
+        res.send(posts);
+    })
+})
+
 // GET editPost form 
 router.get('/:id/edit', (req, res, next) => {
     var postId = req.params.id;
@@ -93,7 +104,15 @@ router.get('/:id/delete', (req, res, next) => {
         Comment.deleteMany({post: postId}, (error, comments) => {
             if(error) return next(error);
             User.findByIdAndUpdate(post.author,{$pull:{"posts":postId}},(error, user)=> {
-                res.redirect('/profile');
+                let fileName = post.imageFile || post.videoFile;
+                console.log(fileName,"uykgg")
+                if(fileName){
+                    const mediaPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+                    fs.unlink(mediaPath, (error) => {
+                        if(error) return next(error);
+                        res.redirect('/profile');
+                    })
+                }
             })
         })
     })
