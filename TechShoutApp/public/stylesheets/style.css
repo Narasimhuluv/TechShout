@@ -361,4 +361,22 @@ aside .li img {
           box-shadow: -2px -2px 8px white, 3px 3px 5px rgba(0, 0, 0, 0.1);
   background: white;
 }
+
+.commentModelContainer {
+  width: 50%;
+  height: 45vh;
+  border: 1px solid red;
+  position: absolute;
+  top: 20%;
+  background-color: white;
+  border-radius: 25px;
+  display: none;
+}
+
+.commentModelContainer .CommentDiv .cross {
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+  color: blue;
+}
 /*# sourceMappingURL=style.css.map */
