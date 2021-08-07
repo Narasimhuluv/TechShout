@@ -122,27 +122,27 @@ router.get('/:id/delete', (req, res, next) => {
 })
 
 // //DELETE delete
-// router.get('/:id/deletehome', (req, res, next) => {
-//     var postId = req.params.id;
-//     Post.findByIdAndDelete(postId,(error, post) => {
-//         if(error) return next(error);
-//         Comment.deleteMany({post: postId}, (error, comments) => {
-//             if(error) return next(error);
-//             User.findByIdAndUpdate(post.author,{$pull:{"posts":postId}},(error, user)=> {
-//                 let fileName = post.imageFile || post.videoFile;
-//                 if(fileName){
-//                     const mediaPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
-//                     fs.unlink(mediaPath, (error) => {
-//                         if(error) return next(error);
-//                         res.redirect('/profile');
-//                     })
-//                 }else {
-//                     res.redirect('/home')
-//                 }
-//             })
-//         })
-//     })
-// })
+router.get('/:id/deletehome', (req, res, next) => {
+    var postId = req.params.id;
+    Post.findByIdAndDelete(postId,(error, post) => {
+        if(error) return next(error);
+        Comment.deleteMany({post: postId}, (error, comments) => {
+            if(error) return next(error);
+            User.findByIdAndUpdate(post.author,{$pull:{"posts":postId}},(error, user)=> {
+                let fileName = post.imageFile || post.videoFile;
+                if(fileName){
+                    const mediaPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+                    fs.unlink(mediaPath, (error) => {
+                        if(error) return next(error);
+                        res.redirect('/profile');
+                    })
+                }else {
+                    res.redirect('/home')
+                }
+            })
+        })
+    })
+})
 
 module.exports = router;
 

@@ -56,13 +56,16 @@
                      <% posts.forEach(element => {%>
                              <div class="w-full post_content py-5 px-5">
                                  <div class="flex items-center w-3/6">
-                                     
-                                         <% if(element.author.profilePic.includes('http')) { %>
-                                             <img src="<%= element.author.profilePic %>" alt="Profile Pic" class="w-1/12 rounded-full">
-                                        <% } else { %>
-                                             <img src="/uploads/<%= element.author.profilePic %>" alt="Profile Pic" class="w-1/12 rounded-full">
-                                        <% } %>
-                                     <p class="ml-3"><%= element.author.name  %> </p>
+                                    <%if(element.author){%>
+                                        <% if(element.author.profilePic.includes('http')) { %>
+                                            <img src="<%= element.author.profilePic %>" alt="Profile Pic" class="w-1/12 rounded-full">
+                                       <% } else { %>
+                                            <img src="/uploads/<%= element.author.profilePic %>" alt="Profile Pic" class="w-1/12 rounded-full">
+                                       <% } %>
+                                            <p class="ml-3"><%= element.author.name  %> </p>
+                                    <%}else{%>
+                                        <p class="ml-3 font-lighter">Anonymous</p>
+                                    <%}%>
                                  </div>
                                  <p class="text-xl mt-4"><%= element.content  %> </p>
                                  <% if(element.imageFile){%>
@@ -90,10 +93,12 @@
                                      <a href="">
                                          <i class="fas fa-share-alt ml-10 text-blue-700"></i>
                                      </a>
- 
-                                     <!-- <a href="/posts/<%=element.id%>/deletehome">
+
+                                     <%if(element.author.id === user.id ){ %>
+                                          <a href="/posts/<%=element.id%>/deletehome">
                                          <i class="fas fa-trash ml-10 text-blck-700"></i>
-                                     </a> -->
+                                     </a>
+                                     <%}%> 
                                  </div>
                              </div>
                      <% }) %>
