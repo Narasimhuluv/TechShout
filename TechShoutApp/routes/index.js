@@ -11,7 +11,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log(req.user);
-  res.render('index', { title: 'Express' });
+  res.render('home', { title: 'Express' });
 });
 
 // Github Authentication Routes
