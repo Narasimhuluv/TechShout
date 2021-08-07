@@ -37,11 +37,11 @@ router.post('/', upload.single('media'), (req, res, next) => {
         let videoFormats = ['mp4', 'avi', 'mkv', 'webm'];
         if(imageFormats.includes(formatName)){
             console.log((formatName));
-            req.body.imageFile = req.file.fileName;
+            req.body.imageFile = req.file.filename;
         }else if(videoFormats.includes(formatName)){
-            req.body.videoFile = req.file.fileName;
+            req.body.videoFile = req.file.filename;
         } 
-        return res.send(req.body)
+        // return res.send(req.body)
     }
     Post.create(req.body, (error, post) => {
         if(error) return next(error);

@@ -3,7 +3,7 @@
     <main class="m-20 min-screen-h flex justify-center items-center" >
         <section class="registration rounded-lg">
             <h2 class="text-xl text-green-600 font-bold text-center mb-5">Registration</h2>
-            <form action="/users/register" method="POST" class="border-2 p-5 flex flex-col" enctype="multipart/form-data">
+            <form action="/users/register" method="POST" class=" p-5 flex flex-col" enctype="multipart/form-data">
                 <% if(error) { %>
                     <p class="text-red-500 "><%= error %></p>
                 <% } %>
@@ -17,4 +17,3 @@
         </section>
     </main>
 
-<% include partials/footer %>

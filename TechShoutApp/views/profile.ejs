@@ -19,10 +19,10 @@
         <div class="home_container flex">
             <aside class="py-16 h-screen">
                <div>
-                    <img class="image_crop w-2/6" src="/images/logo.png" alt="">
+                    <img class="image_crop w-2/6" src="/images/birdlogo.png" alt="">
                     <nav>
                         <ul class="">
-                            <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/globe.png"/> <a href="">Home</a></li>
+                            <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/globe.png"/> <a href="/home">Home</a></li>
                             <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/google-home.png"/> <a href="">Explore</a></li>
                             <!-- <li class="li flex  align_center w-2/12"><img src="https://img.icons8.com/fluency/48/000000/test-account.png"/> <a href="">Profile</a></li> -->
                             <% if(user.profilePic) { %>
@@ -92,7 +92,15 @@
                                     <p class="ml-3"><%= user.name  %> </p>
                                 </div>
                                 <p class="text-xl mt-4"><%= element.content  %> </p>
-                                <img class="h-52 border-2 rounded-lg mt-4"  src="uploads/<%=element.imageFile%>" alt="<%=element.imageFile%>">
+
+                                <% if(element.imageFile){%>
+                                    <img class="h-52 border-2 rounded-lg mt-4"  src="uploads/<%=element.imageFile%>" alt="<%=element.imageFile%>">
+                                <%} else if(element.videoFile){%>
+                                    <video  controls muted class=" border-2 rounded-lg mt-4"> 
+                                        <source src="uploads/<%= element.videoFile  %> " type="video/mp4"> 
+                                      </video>
+                                <%}%> 
+
                                 <div class="flex mt-4" >
                                     <a href="" >
                                         <p><%=element.likes ? element.likes : 0  %> </p>
