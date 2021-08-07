@@ -90,6 +90,14 @@ router.get('/:id/like', (req, res, next) => {
         res.redirect("/profile");
     })
 })
+
+router.get('/:id/likehome', (req, res, next) => {
+    var postId = req.params.id;
+    Post.findByIdAndUpdate(postId, {$inc:{likes:1}}, (error, post) => {
+        if(error) return next(error);
+        res.redirect("/home");
+    })
+})
 //DELETE delete
 router.get('/:id/delete', (req, res, next) => {
     var postId = req.params.id;
@@ -112,6 +120,29 @@ router.get('/:id/delete', (req, res, next) => {
         })
     })
 })
+
+// //DELETE delete
+// router.get('/:id/deletehome', (req, res, next) => {
+//     var postId = req.params.id;
+//     Post.findByIdAndDelete(postId,(error, post) => {
+//         if(error) return next(error);
+//         Comment.deleteMany({post: postId}, (error, comments) => {
+//             if(error) return next(error);
+//             User.findByIdAndUpdate(post.author,{$pull:{"posts":postId}},(error, user)=> {
+//                 let fileName = post.imageFile || post.videoFile;
+//                 if(fileName){
+//                     const mediaPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+//                     fs.unlink(mediaPath, (error) => {
+//                         if(error) return next(error);
+//                         res.redirect('/profile');
+//                     })
+//                 }else {
+//                     res.redirect('/home')
+//                 }
+//             })
+//         })
+//     })
+// })
 
 module.exports = router;
 

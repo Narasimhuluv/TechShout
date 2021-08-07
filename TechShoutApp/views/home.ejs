@@ -73,10 +73,10 @@
                                       </video>
                                 <%}%> 
                                  <div class="flex mt-4" >
-                                     <a href="" >
+                                     <a href="/posts/<%=element.id%>/likehome" >
                                          <p><%=element.likes ? element.likes : 0  %> </p>
                                      </a>
-                                     <a href="">
+                                     <a href="/posts/<%=element.id%>/likehome">
                                          <i class="fas fa-heart ml-2 text-red-500"></i>
                                      </a>
 
@@ -91,9 +91,9 @@
                                          <i class="fas fa-share-alt ml-10 text-blue-700"></i>
                                      </a>
  
-                                     <a href="">
+                                     <!-- <a href="/posts/<%=element.id%>/deletehome">
                                          <i class="fas fa-trash ml-10 text-blck-700"></i>
-                                     </a>
+                                     </a> -->
                                  </div>
                              </div>
                      <% }) %>
