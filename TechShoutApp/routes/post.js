@@ -5,6 +5,7 @@ var path = require('path');
 
 var Post = require('../models/Post');
 var User = require('../models/User');
+var Comment = require('../models/Comment')
 
 var uploadPath = path.join(__dirname, '../', 'public/uploads');
 // Strorage for Uploaded Files
@@ -36,12 +37,10 @@ router.post('/', upload.single('media'), (req, res, next) => {
         let imageFormats = ['jpg', 'jpeg', 'png', 'gif'];
         let videoFormats = ['mp4', 'avi', 'mkv', 'webm'];
         if(imageFormats.includes(formatName)){
-            console.log((formatName));
-            req.body.imageFile = req.file.fileName;
+            req.body.imageFile = req.file.filename;
         }else if(videoFormats.includes(formatName)){
-            req.body.videoFile = req.file.fileName;
+            req.body.videoFile = req.file.filename;
         } 
-        return res.send(req.body)
     }
     Post.create(req.body, (error, post) => {
         if(error) return next(error);
@@ -78,7 +77,26 @@ router.post('/:id/update', (req, res, next) => {
 })
 
 // POST like 
-//POST unlike
+router.get('/:id/like', (req, res, next) => {
+    var postId = req.params.id;
+    Post.findByIdAndUpdate(postId, {$inc:{likes:1}}, (error, post) => {
+        if(error) return next(error);
+        res.redirect("/profile");
+    })
+})
+//DELETE delete
+router.get('/:id/delete', (req, res, next) => {
+    var postId = req.params.id;
+    Post.findByIdAndDelete(postId,(error, post) => {
+        if(error) return next(error);
+        Comment.deleteMany({post: postId}, (error, comments) => {
+            if(error) return next(error);
+            User.findByIdAndUpdate(post.author,{$pull:{"posts":postId}},(error, user)=> {
+                res.redirect('/profile');
+            })
+        })
+    })
+})
 
 module.exports = router;
 
