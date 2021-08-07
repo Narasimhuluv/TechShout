@@ -63,13 +63,7 @@ router.get('/', (req, res, next) => {
 })
 
 //GET single posts 
-router.get('/:id', (req, res, next) => {
-    var postId = req.params.id;
-    Post.findById(postId).populate('comments').exec((error, posts) => {
-        if(error) return next(error);
-        res.send(posts);
-    })
-})
+
 
 // GET editPost form 
 router.get('/:id/edit', (req, res, next) => {
@@ -105,13 +99,14 @@ router.get('/:id/delete', (req, res, next) => {
             if(error) return next(error);
             User.findByIdAndUpdate(post.author,{$pull:{"posts":postId}},(error, user)=> {
                 let fileName = post.imageFile || post.videoFile;
-                console.log(fileName,"uykgg")
                 if(fileName){
                     const mediaPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
                     fs.unlink(mediaPath, (error) => {
                         if(error) return next(error);
                         res.redirect('/profile');
                     })
+                }else {
+                    res.redirect('/profile')
                 }
             })
         })
