@@ -1,7 +1,9 @@
 <% include partials/header %>
 
     <main class="m-20 min-screen-h flex justify-center items-center" >
+
         <section class="registration rounded-lg">
+            <img class="w-3/12" src="/images/birdlogo.png" alt="">
             <h2 class="text-xl text-green-600 font-bold text-center mb-5">Registration</h2>
             <form action="/users/register" method="POST" class=" p-5 flex flex-col" enctype="multipart/form-data">
                 <% if(error) { %>

@@ -93,12 +93,14 @@
                                      <a href="">
                                          <i class="fas fa-share-alt ml-10 text-blue-700"></i>
                                      </a>
-
-                                     <%if(element.author.id === user.id ){ %>
-                                          <a href="/posts/<%=element.id%>/deletehome">
-                                         <i class="fas fa-trash ml-10 text-blck-700"></i>
-                                     </a>
-                                     <%}%> 
+                                     
+                                     <% if(element.author){%>
+                                        <% if(element.author.id === user.id ){ %>
+                                            <a href="/posts/<%=element.id%>/deletehome">
+                                           <i class="fas fa-trash ml-10 text-blck-700"></i>
+                                       </a>
+                                       <%}%> 
+                                   <%  } %> 
                                  </div>
                              </div>
                      <% }) %>
